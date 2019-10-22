@@ -20,7 +20,6 @@ app.use(cors());
 // initialize the main project folder
 app.use(express.static('website'));
 
-
 // setup Server
 const port = 8000;
 
@@ -32,17 +31,25 @@ function listening() {
 }
 
 // setup GET route
-app.get('/', sendData);
+app.get('/entries', getData);
 
-function sendData(req, res) {
-	res.send('hiyooo');
-	return projectData;
+function getData(req, res) {
+	res.send(projectData);
 }
 
 // setup POST route
 app.post('/', postData);
 
-function postData(req, res) {
-	console.log(req.body);
+const entries = [];
 
+function postData(req, res) {
+
+	newEntry = {
+		location: req.body.location,
+		weather: req.body.weather,
+		feelings: req.body.feelings
+	};
+
+	entries.push(newEntry);
+	console.log(entries);
 }

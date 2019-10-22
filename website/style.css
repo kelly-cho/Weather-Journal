@@ -49,7 +49,7 @@ body {
 
 }
 
-/*  Basic Styling To Override Default For Basic HTML Elements */
+/*  basic styling to override default for basic html elements */
 label {
     display: block;
     font-size: 27px;
@@ -89,7 +89,7 @@ textarea {
     font-family: 'Oswald', sans-serif;
 }
 
-/* Reset style for HTML element on active to have no border*/
+/* reset style for html element on active to have no border */
 input:focus,
 select:focus,
 textarea:focus,
@@ -97,7 +97,7 @@ button:focus {
     outline: none;
 }
 
-/* Style for Placeholder Text*/
+/* style for placeholder text */
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: #f0d43a; 
     font-family: 'Oswald', sans-serif;
