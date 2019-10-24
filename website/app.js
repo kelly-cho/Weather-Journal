@@ -1,29 +1,55 @@
 // global variables
 const baseUrl = 'http://api.openweathermap.org/data/2.5/weather?zip=';
-const apiKey = '&APPID=0e2ec7dc3d32e820f8abdd569b0742b9';
+const apiKey  = '&APPID=0e2ec7dc3d32e820f8abdd569b0742b9';
 
 // create a new date instance dynamically with JS
 let d = new Date();
-let newDate = d.getMonth() + '.' + d.getDate() + '.' + d.getFullYear();
+
+// in javascript, month is zero-indexed, so it's month 0-11
+let month = d.getMonth() + 1;
+let newDate = month + '.' + d.getDate() + '.' + d.getFullYear();
 
 document.getElementById('generate').addEventListener('click', generateEntry);
 
 // get weather info from the api based on the zip entered
 function generateEntry(e) {
 	const zip = document.getElementById('zip').value;
+
+	if (zip == '')
+	{
+		alert('Please enter a valid ZIP code!');
+		return;
+	}
+
 	const feelings = document.getElementById('feelings').value;
 	
 	getWeather(baseUrl, zip, apiKey) // NO SEMICOLON!!!
 	// data is the result returned from the api call
 	.then(function(data) {
-
-		console.log('heee');
-		postData('/', {location: data.name, weather: data.weather[0].main, feelings: feelings});
+		postData('/', {date: newDate, location: data.name, temp: data.main.temp, content: feelings});
+		updateUI();
 	});
 }
 
-// async GET function
-const getWeather = async (baseUrl, zip, apiKey) => {
+// async UPDATE UI function
+const updateUI = async() => {
+	const request = await fetch('/record');
+
+	try {
+		const record = await request.json();
+
+		document.getElementById('date').innerHTML = record.date;
+		document.getElementById('location').innerHTML = record.location;
+		document.getElementById('temp').innerHTML = record.temp;
+		document.getElementById('content').innerHTML = record.content;
+
+	} catch(error) {
+		console.log('error', error);
+	}
+}
+
+// async GET WEATHER function
+const getWeather = async(baseUrl, zip, apiKey) => {
 	const response = await fetch(baseUrl + zip + apiKey);
 
 	try {
@@ -36,7 +62,7 @@ const getWeather = async (baseUrl, zip, apiKey) => {
 }
 
 // async POST function
-const postData = async (url = '', data = {}) => {
+const postData = async(url = '', data = {}) => {
 
 	const response = await fetch (url, {
 	method: 'POST',	// * GET, POST, PUT, DELETE, etc.

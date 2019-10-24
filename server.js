@@ -3,12 +3,13 @@ projectData = {};
 
 // require Express to run server and routes
 const express = require('express');
-const bodyParser = require('body-parser')
 
 // start up an instance of app
 const app = express();
 
-/* middleware*/
+// middleware
+const bodyParser = require('body-parser')
+
 // here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -31,25 +32,21 @@ function listening() {
 }
 
 // setup GET route
-app.get('/entries', getData);
+app.get('/record', getData);
 
 function getData(req, res) {
 	res.send(projectData);
 }
 
-// setup POST route
+// setup POST route: the first argument being the URL to make a POST to
 app.post('/', postData);
-
-const entries = [];
 
 function postData(req, res) {
 
-	newEntry = {
-		location: req.body.location,
-		weather: req.body.weather,
-		feelings: req.body.feelings
-	};
+	projectData.date = req.body.date;
+	projectData.location = req.body.location;
+	projectData.temp = Math.round(req.body.temp - 273.15);	// convert from kelvin to celsius
+	projectData.content = req.body.content;
 
-	entries.push(newEntry);
-	console.log(entries);
+	console.log(projectData);
 }

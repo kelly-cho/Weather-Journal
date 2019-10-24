@@ -13,7 +13,7 @@ body {
     justify-content: center;
     grid-gap: 1em;
     font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
     padding: 5%;
 }
 
@@ -62,7 +62,7 @@ input {
     background: #22b2da;
     color: #f0d43a;
     font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: none;
 }
 
@@ -73,7 +73,7 @@ button {
     background: #3b4a6b;
     color: #f0d43a;
     font-size: 26px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
     border: none;
     box-shadow: 2px 4px 5px #444;
 }
@@ -86,7 +86,7 @@ textarea {
     background: #22b2da;
     color: #f0d43a;
     font-size: 20px;
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 }
 
 /* reset style for html element on active to have no border */
@@ -100,18 +100,18 @@ button:focus {
 /* style for placeholder text */
 ::placeholder { /* Firefox, Chrome, Opera */ 
     color: #f0d43a; 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 
 } 
   
 :-ms-input-placeholder { /* Internet Explorer 10-11 */ 
     color: #f0d43a; 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 
 } 
   
 ::-ms-input-placeholder { /* Microsoft Edge */ 
     color: #f0d43a; 
-    font-family: 'Oswald', sans-serif;
+    font-family: 'Poppins', sans-serif;
 
 } 
