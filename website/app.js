@@ -7,7 +7,7 @@ let d = new Date();
 
 // in javascript, month is zero-indexed, so it's month 0-11
 let month = d.getMonth() + 1;
-let newDate = month + '.' + d.getDate() + '.' + d.getFullYear();
+let newDate = d.getFullYear() + '-' + month + '-' + d.getDate();
 
 document.getElementById('generate').addEventListener('click', generateEntry);
 
@@ -39,9 +39,13 @@ const updateUI = async() => {
 		const record = await request.json();
 
 		document.getElementById('date').innerHTML = record.date;
-		document.getElementById('location').innerHTML = record.location;
-		document.getElementById('temp').innerHTML = record.temp;
+		document.getElementById('location').innerHTML = 'Location: ' + record.location;
+		document.getElementById('temp').innerHTML = 'Temperature: ' + record.temp + '&degC';
 		document.getElementById('content').innerHTML = record.content;
+
+		// reset enter fields
+		document.getElementById('zip').value = '';
+		document.getElementById('feelings').value = '';
 
 	} catch(error) {
 		console.log('error', error);
@@ -54,7 +58,6 @@ const getWeather = async(baseUrl, zip, apiKey) => {
 
 	try {
 		const data = await response.json();
-		console.log(data);
 		return data;
 	} catch(error) {
 		console.log('error', error);
